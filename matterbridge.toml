@@ -1,29 +1,19 @@
-#####################################################################
-# MATTERBRIDGE CONFIG FOR SLACK → DISCORD VIA RAILWAY (ONE-WAY)
-#####################################################################
-
 [slack.betterstack]
 Token="${SLACK_BOT_TOKEN}"
-RemoteNickFormat="Slack-{NICK}"
+RemoteNickFormat="slk-{NICK}"
 
-# Channel in Slack to read from
-# Example: "#alerts" or "#betterstack"
-PrefixMessagesWithNick=true
-
-[discordwebhook.incidents]
+[discord.incidents]
 WebhookURL="${DISCORD_WEBHOOK_URL}"
+RemoteNickFormat="dsc-{NICK}"
 
-#####################################################################
-# GATEWAY (connect Slack → Discord)
-#####################################################################
 [[gateway]]
 name="slack-discord-incidents"
 enable=true
 
     [[gateway.in]]
     account="slack.betterstack"
-    channel="${SLACK_CHANNEL}"   # e.g. #incidents
+    channel="${SLACK_CHANNEL}"          # e.g. #betterstack-status
 
     [[gateway.out]]
-    account="discordwebhook.incidents"
-    channel="${DISCORD_CHANNEL}" # arbitrary label for logs
+    account="discord.incidents"
+    channel="${DISCORD_CHANNEL}"        # e.g. ID:1442651713419874526
