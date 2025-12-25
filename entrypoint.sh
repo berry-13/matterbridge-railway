@@ -5,4 +5,4 @@ set -e
 envsubst < /etc/matterbridge/matterbridge.toml.template > /tmp/matterbridge.toml
 
 # Run matterbridge with the processed config
-exec /matterbridge -conf /tmp/matterbridge.toml
+exec /bin/matterbridge -conf /tmp/matterbridge.toml
