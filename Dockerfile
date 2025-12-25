@@ -11,7 +11,7 @@ RUN git clone https://github.com/tippl/matterbridge.git . && \
 # Runtime image
 FROM alpine:3.20
 
-RUN apk add --no-cache ca-certificates gettext
+RUN apk add --no-cache ca-certificates gettext tzdata
 
 COPY --from=builder /build/matterbridge /bin/matterbridge
 
