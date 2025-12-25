@@ -3,6 +3,17 @@ Token="${SLACK_BOT_TOKEN}"
 AppToken="${SLACK_APP_TOKEN}"
 PrefixMessagesWithNick=true
 
+# Extract text from Slack Block Kit JSON messages (used by apps like BetterStack)
+[[slack.source.ReplaceMessages]]
+search = '^\{"type":"section","text":\{"type":"mrkdwn","text":"(.+)"\}\}$'
+replace = "$1"
+
+# Append ping to messages (optional - leave DISCORD_PING empty to disable)
+# Use <@&ROLE_ID> for roles or <@USER_ID> for users
+[[slack.source.ReplaceMessages]]
+search = "^(.+)$"
+replace = "$1 ${DISCORD_PING}"
+
 [discord.destination]
 Token="${DISCORD_BOT_TOKEN}"
 Server="${DISCORD_SERVER}"

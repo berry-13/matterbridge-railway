@@ -26,6 +26,7 @@ This repo:
 | `DISCORD_BOT_TOKEN` | Discord Bot Token with Message Content Intent enabled |
 | `DISCORD_SERVER` | Discord server ID (enable Developer Mode → right-click server → Copy ID) |
 | `DISCORD_CHANNEL` | Discord channel ID (right-click channel → Copy ID, e.g. `1234567890123456789`) |
+| `DISCORD_PING` | (Optional) Role or user to ping: `<@&ROLE_ID>` for roles, `<@USER_ID>` for users |
 
 5. Deploy  
 6. Done — Matterbridge will begin bridging messages automatically.
