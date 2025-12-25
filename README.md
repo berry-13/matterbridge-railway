@@ -20,7 +20,8 @@ This repo:
 
 | Variable | Description |
 |---------|-------------|
-| `SLACK_BOT_TOKEN` | Slack Bot User OAuth Token (`xoxb-...`) from a [Classic App](https://api.slack.com/apps?new_classic_app=1) |
+| `SLACK_BOT_TOKEN` | Slack Bot User OAuth Token (`xoxb-...`) |
+| `SLACK_APP_TOKEN` | Slack App-Level Token (`xapp-...`) for Socket Mode |
 | `SLACK_CHANNEL` | Slack channel name without `#` (e.g. `betterstack-status`) |
 | `DISCORD_BOT_TOKEN` | Discord Bot Token with Message Content Intent enabled |
 | `DISCORD_SERVER` | Discord server name or ID |
@@ -57,20 +58,29 @@ Slack Channel → Matterbridge → Discord Channel
 
 Messages posted in your Slack channel are automatically forwarded to Discord using Matterbridge.
 
-- Uses official Slack and Discord Bot APIs
-- AutoWebhooks enabled for proper username/avatar display
-- **Unidirectional**: Slack → Discord only (Discord messages are not sent back to Slack)
+- Uses [tippl's matterbridge fork](https://github.com/tippl/matterbridge) with Slack Socket Mode support
+- Slack Events API (modern apps) - Classic Apps deprecated since June 2024
+- Discord AutoWebhooks enabled for proper username/avatar display
+- **Unidirectional**: Slack → Discord only
 
 ---
 
 ## 🔧 Setup Requirements
 
-### Slack (Classic App)
-1. Create a [Slack App (Classic)](https://api.slack.com/apps?new_classic_app=1) - **must be Classic, not new**
-2. Add a Legacy Bot User under "App Home"
-3. Add OAuth scopes: `channels:write`, `chat:write:bot`, `chat:write:user`, `users.profile:read`
-4. Install to workspace and copy the **Bot User OAuth Token** (`xoxb-...`)
-5. Invite the bot to your channel: `/invite @botname`
+### Slack (Modern App with Socket Mode)
+1. Create a new app at [api.slack.com/apps](https://api.slack.com/apps) → "Create New App" → "From scratch"
+2. Go to **Socket Mode** and enable it - this generates your `xapp-...` token
+3. Go to **OAuth & Permissions** and add these Bot Token Scopes:
+   - `channels:history`, `channels:read`
+   - `chat:write`, `chat:write.customize`
+   - `groups:history`, `groups:read`
+   - `im:history`, `im:read`
+   - `mpim:history`, `mpim:read`
+   - `users:read`, `users.profile:read`
+4. Go to **Event Subscriptions**, enable events, and subscribe to:
+   - `message.channels`, `message.groups`, `message.im`, `message.mpim`
+5. Install app to workspace and copy **Bot User OAuth Token** (`xoxb-...`)
+6. Invite the bot to your channel: `/invite @botname`
 
 ### Discord
 1. Create an app at [Discord Developer Portal](https://discord.com/developers/applications)

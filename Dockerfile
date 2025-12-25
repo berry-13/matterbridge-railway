@@ -1,9 +1,19 @@
-# Pin to specific version for reproducibility (update as needed)
-FROM 42wim/matterbridge:1.26.0
+# Build from tippl's fork which has Slack Events API / Socket Mode support
+# (Required since Classic Slack Apps were deprecated in June 2024)
+FROM golang:1.22-alpine AS builder
 
-# Install envsubst for environment variable substitution
-USER root
-RUN apk add --no-cache gettext
+RUN apk add --no-cache git ca-certificates
+
+WORKDIR /build
+RUN git clone https://github.com/tippl/matterbridge.git . && \
+    go build -o matterbridge
+
+# Runtime image
+FROM alpine:3.20
+
+RUN apk add --no-cache ca-certificates gettext
+
+COPY --from=builder /build/matterbridge /bin/matterbridge
 
 # Copy config template and entrypoint script
 COPY matterbridge.toml /etc/matterbridge/matterbridge.toml.template

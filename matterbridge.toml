@@ -1,5 +1,6 @@
 [slack.source]
 Token="${SLACK_BOT_TOKEN}"
+AppToken="${SLACK_APP_TOKEN}"
 PrefixMessagesWithNick=true
 
 [discord.destination]
