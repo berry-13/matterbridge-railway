@@ -40,6 +40,7 @@ matterbridge-railway/
 ├── .dockerignore
 ├── .gitignore
 ├── Dockerfile
+├── entrypoint.sh
 ├── matterbridge.toml
 ├── LICENSE
 └── README.md
