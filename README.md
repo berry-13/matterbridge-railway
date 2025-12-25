@@ -20,10 +20,11 @@ This repo:
 
 | Variable | Description |
 |---------|-------------|
-| `SLACK_BOT_TOKEN` | Slack Bot User OAuth Token (xoxb-...) |
-| `SLACK_CHANNEL` | Slack channel to read from (e.g. `#incidents`) |
-| `DISCORD_WEBHOOK_URL` | Discord webhook URL |
-| `DISCORD_CHANNEL` | Arbitrary label for logs (e.g. `incidents`) |
+| `SLACK_BOT_TOKEN` | Slack Bot User OAuth Token (`xoxb-...`) from a [Classic App](https://api.slack.com/apps?new_classic_app=1) |
+| `SLACK_CHANNEL` | Slack channel name without `#` (e.g. `betterstack-status`) |
+| `DISCORD_BOT_TOKEN` | Discord Bot Token with Message Content Intent enabled |
+| `DISCORD_SERVER` | Discord server name or ID |
+| `DISCORD_CHANNEL` | Discord channel name (e.g. `incidents`) |
 
 5. Deploy  
 6. Done — Matterbridge will begin bridging messages automatically.
@@ -50,12 +51,33 @@ matterbridge-railway/
 
 ## 🧩 How it Works
 
-Slack → Matterbridge → Discord
-(Using official Slack API and Discord Webhooks, no deprecated features.)
+```
+Slack Channel → Matterbridge → Discord Channel
+```
 
-This is the most stable, future-proof method for routing Better Stack alerts from Slack into Discord.
+Messages posted in your Slack channel are automatically forwarded to Discord using Matterbridge.
 
-**Note:** This configuration is **unidirectional** (Slack to Discord only). Discord webhooks are write-only and cannot receive messages. For bidirectional bridging, you would need to configure a Discord bot token instead of a webhook.
+- Uses official Slack and Discord Bot APIs
+- AutoWebhooks enabled for proper username/avatar display
+- **Unidirectional**: Slack → Discord only (Discord messages are not sent back to Slack)
+
+---
+
+## 🔧 Setup Requirements
+
+### Slack (Classic App)
+1. Create a [Slack App (Classic)](https://api.slack.com/apps?new_classic_app=1) - **must be Classic, not new**
+2. Add a Legacy Bot User under "App Home"
+3. Add OAuth scopes: `channels:write`, `chat:write:bot`, `chat:write:user`, `users.profile:read`
+4. Install to workspace and copy the **Bot User OAuth Token** (`xoxb-...`)
+5. Invite the bot to your channel: `/invite @botname`
+
+### Discord
+1. Create an app at [Discord Developer Portal](https://discord.com/developers/applications)
+2. Add a Bot and copy the token
+3. Enable **Message Content Intent** and **Server Members Intent** under Bot settings
+4. Invite bot to server with Manage Webhooks permission:
+   `https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&scope=bot&permissions=536870912`
 
 ---
 
