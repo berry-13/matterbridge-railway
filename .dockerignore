@@ -1,0 +1,25 @@
+# Git
+.git
+.gitignore
+
+# GitHub
+.github
+
+# Environment files
+*.env
+.env
+.env.*
+
+# Documentation
+README.md
+LICENSE
+
+# IDE and OS
+.DS_Store
+.idea
+.vscode
+*.swp
+*.swo
+
+# Claude
+.claude

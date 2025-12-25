@@ -1,3 +1,17 @@
-# Ignore tokens accidentally placed locally
-*.env
+# Environment files (secrets)
 .env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

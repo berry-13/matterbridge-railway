@@ -33,24 +33,28 @@ This repo:
 ## 📁 File Structure
 
 ```
-
-matterbridge-railway-deploy/
-├─ Dockerfile
-├─ matterbridge.toml
-├─ LICENSE
-├─ README.md
-└─ .gitignore
-
+matterbridge-railway/
+├── .github/
+│   └── workflows/
+│       └── docker-publish.yml
+├── .dockerignore
+├── .gitignore
+├── Dockerfile
+├── matterbridge.toml
+├── LICENSE
+└── README.md
 ```
 
 ---
 
 ## 🧩 How it Works
 
-Slack → Matterbridge → Discord  
+Slack → Matterbridge → Discord
 (Using official Slack API and Discord Webhooks, no deprecated features.)
 
 This is the most stable, future-proof method for routing Better Stack alerts from Slack into Discord.
+
+**Note:** This configuration is **unidirectional** (Slack to Discord only). Discord webhooks are write-only and cannot receive messages. For bidirectional bridging, you would need to configure a Discord bot token instead of a webhook.
 
 ---
 
