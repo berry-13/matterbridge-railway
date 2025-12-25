@@ -18,4 +18,4 @@ channel="${SLACK_CHANNEL}"
 
 [[gateway.out]]
 account="discord.destination"
-channel="${DISCORD_CHANNEL}"
+channel="ID:${DISCORD_CHANNEL}"

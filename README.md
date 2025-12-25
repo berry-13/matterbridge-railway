@@ -24,8 +24,8 @@ This repo:
 | `SLACK_APP_TOKEN` | Slack App-Level Token (`xapp-...`) for Socket Mode |
 | `SLACK_CHANNEL` | Slack channel name without `#` (e.g. `betterstack-status`) |
 | `DISCORD_BOT_TOKEN` | Discord Bot Token with Message Content Intent enabled |
-| `DISCORD_SERVER` | Discord server name or ID |
-| `DISCORD_CHANNEL` | Discord channel name (e.g. `incidents`) |
+| `DISCORD_SERVER` | Discord server ID (enable Developer Mode → right-click server → Copy ID) |
+| `DISCORD_CHANNEL` | Discord channel ID (right-click channel → Copy ID, e.g. `1234567890123456789`) |
 
 5. Deploy  
 6. Done — Matterbridge will begin bridging messages automatically.
